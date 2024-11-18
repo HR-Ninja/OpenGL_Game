@@ -1,0 +1,1 @@
+This is going to be a full 2D game, the goal will be to add great shader effects, lighting and to just learn as much as i can. I have an idea in my mind for my dream game and this is my project to learn.
