@@ -42,6 +42,12 @@
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libaries\includes\GLFW\glfw3.h">
@@ -947,6 +953,12 @@
     <ClInclude Include="Settings.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLevel.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Libaries\includes\glm\detail\func_common.inl">
@@ -1365,12 +1377,22 @@
     </None>
     <None Include="Resources\Shaders\sprite.vert" />
     <None Include="Resources\Shaders\sprite.frag" />
+    <None Include="Resources\Assets\one.lvl" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Libaries\lib\glfw3.lib" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Assets\test_sprite.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\paddle.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\block.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\block_solid.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

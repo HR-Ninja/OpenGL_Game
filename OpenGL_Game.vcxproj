@@ -148,6 +148,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameLevel.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Libaries\includes\glad\glad.c" />
     <ClCompile Include="Libaries\includes\glm\detail\glm.cpp" />
     <ClCompile Include="Libaries\includes\glm\glm.cppm" />
@@ -159,6 +161,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="GameLevel.hpp" />
+    <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="Libaries\includes\glad\glad.h" />
     <ClInclude Include="Libaries\includes\GLFW\glfw3.h" />
     <ClInclude Include="Libaries\includes\GLFW\glfw3native.h" />
@@ -599,6 +603,7 @@
     <None Include="Libaries\includes\glm\gtx\vector_angle.inl" />
     <None Include="Libaries\includes\glm\gtx\vector_query.inl" />
     <None Include="Libaries\includes\glm\gtx\wrap.inl" />
+    <None Include="Resources\Assets\one.lvl" />
     <None Include="Resources\Shaders\sprite.frag" />
     <None Include="Resources\Shaders\sprite.vert" />
   </ItemGroup>
@@ -606,6 +611,9 @@
     <Library Include="Libaries\lib\glfw3.lib" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\Assets\block.png" />
+    <Image Include="Resources\Assets\block_solid.png" />
+    <Image Include="Resources\Assets\paddle.png" />
     <Image Include="Resources\Assets\test_sprite.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
