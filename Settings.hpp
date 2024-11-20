@@ -7,6 +7,6 @@ namespace Settings {
 		unsigned int SCREEN_HEIGHT = 720;
 	};
 
-	static Window g_window;
+	inline Window g_window;
 
 }
