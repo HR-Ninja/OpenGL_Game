@@ -11,7 +11,8 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
-static Game game(Settings::g_window.SCREEN_WIDTH, Settings::g_window.SCREEN_HEIGHT);
+inline Game game(Settings::g_window.SCREEN_WIDTH, Settings::g_window.SCREEN_HEIGHT);
+
 
 int main()
 {
@@ -55,6 +56,7 @@ int main()
 
     ResourceManager::Clear();
     OpenGL::Cleanup();
+
 	return 0;
 }
 

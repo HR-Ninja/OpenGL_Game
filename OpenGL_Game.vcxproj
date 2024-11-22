@@ -463,6 +463,7 @@
     <ClInclude Include="Libaries\includes\glm\vector_relational.hpp" />
     <ClInclude Include="Libaries\includes\KHR\khrplatform.h" />
     <ClInclude Include="OpenGL.hpp" />
+    <ClInclude Include="Profiler.hpp" />
     <ClInclude Include="ResourceManager.hpp" />
     <ClInclude Include="Settings.hpp" />
     <ClInclude Include="SpriteRenderer.hpp" />

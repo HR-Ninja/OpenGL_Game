@@ -1,0 +1,3 @@
+{"otherData": {},"traceEvents":[
+{"cat":"function","dur":394,"name":"GameLevel::Load","ph":"X","pid":0,"tid":7093273645819866772,"ts":573931331805},
+{"cat":"function","dur":25435,"name":"Game::Init","ph":"X","pid":0,"tid":7093273645819866772,"ts":573931307020}]}

@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Profiler.hpp"
 
 
 SpriteRenderer* Renderer;
@@ -19,6 +20,7 @@ Game::~Game()
 
 void Game::Init()
 {
+	PROFILE_FUNCTION();
 	ResourceManager::LoadShader("Resources/Shaders/sprite.vert", "Resources/Shaders/sprite.frag", nullptr, "sprite");
 
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->Width),

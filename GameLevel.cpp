@@ -1,5 +1,5 @@
 #include "GameLevel.hpp"
-
+#include "Profiler.hpp"
 #include <fstream>
 #include <sstream>
 
@@ -54,6 +54,7 @@ void GameLevel::init(std::vector<std::vector<unsigned int>> tileData, unsigned i
 
 void GameLevel::Load(const char* file, unsigned int levelWidth, unsigned int levelHeight)
 {
+    PROFILE_FUNCTION();
 	Bricks.clear();
 
 	unsigned int tileCode;
