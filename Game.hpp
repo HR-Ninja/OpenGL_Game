@@ -5,6 +5,7 @@
 #include "ResourceManager.hpp"
 #include "SpriteRenderer.hpp"
 #include "GameLevel.hpp"
+#include "BallObject.hpp"
 
 typedef uint32_t uint32;
 
@@ -14,6 +15,16 @@ enum GameState {
     GAME_MENU,
     GAME_WIN
 };
+
+enum Direction {
+    UP,
+    RIGHT,
+    DOWN,
+    LEFT
+};
+
+
+typedef std::tuple<bool, Direction, glm::vec2> Collision;
 
 // Initial size of the player paddle
 const glm::vec2 PLAYER_SIZE(100.0f, 20.0f);
@@ -42,6 +53,10 @@ public:
     void ProcessInput(float dt);
     void Update(float dt);
     void Render();
+    void HandleCollisions();
+    Direction VectorDirection(glm::vec2 target);
+private:
+    Collision CheckCollisions(BallObject& one, GameObject& two);
 };
 
 #endif
