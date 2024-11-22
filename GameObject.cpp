@@ -2,18 +2,18 @@
 
 
 GameObject::GameObject() : 
-	Position(0.0f, 0.0f), Size(1.0f, 1.0f), Velocity(0.0f), Color(1.0f), Rotation(0.0f), Sprite(), IsSolid(false), Destroyed(false) {
+	m_position(0.0f, 0.0f), m_size(1.0f, 1.0f), m_velocity(0.0f), m_color(1.0f), m_rotation(0.0f), m_sprite(), m_isSolid(false), m_destroyed(false) {
 
 }
 
 
 
 GameObject::GameObject(glm::vec2 pos, glm::vec2 size, Texture2D sprite, glm::vec3 color, glm::vec2 velocity) : 
-	Position(pos), Size(size), Velocity(velocity), Color(color), Rotation(0.0f), Sprite(sprite), IsSolid(false), Destroyed(false) {
+	m_position(pos), m_size(size), m_velocity(velocity), m_color(color), m_rotation(0.0f), m_sprite(sprite), m_isSolid(false), m_destroyed(false) {
 
 }
 
 
 void GameObject::Draw(SpriteRenderer& renderer) {
-	renderer.DrawSprite(Position, Sprite, Size, Rotation, Color);
+	renderer.DrawSprite(m_position, m_sprite, m_size, m_rotation, m_color);
 }

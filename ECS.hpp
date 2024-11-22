@@ -27,6 +27,14 @@ struct Entity {
 
 extern uint32_t g_entityCount = 0;
 
+struct test1 {
+	int x;
+};
+
+struct test2 : test1 {
+	int y;
+};
+
 class ECS {
 
 public:
@@ -65,6 +73,7 @@ public:
 		}
 
 		m_entities[name].m_componentID.push_back(ComponentType);
-	}
+	};
 
 };
+
