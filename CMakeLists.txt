@@ -22,11 +22,13 @@ add_executable(${PROJECT_NAME}
 )
 
 target_include_directories(${PROJECT_NAME}
-    ${CMAKE_SOURCE_DIR}/Libaries/includes
+    PUBLIC
+        ${CMAKE_SOURCE_DIR}/Libaries/includes
 )
 
 target_link_directories(${PROJECT_NAME}
-    ${CMAKE_SOURCE_DIR}/Libaries/lib
+    PUBLIC
+        ${CMAKE_SOURCE_DIR}/Libaries/lib
 )
 
 target_link_libraries(${PROJECT_NAME}
