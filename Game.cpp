@@ -118,25 +118,23 @@ void Game::HandleCollisions()
 			continue;
 		}
 
-		Collision collision = CheckCollisions(*Ball, box);
+		// collision tuple
+		auto [hasColided, direction, difference] = CheckCollisions(*Ball, box);
 
-		if (std::get<0>(collision))
+		if (hasColided)
 		{
 			if (!box.m_isSolid)
 			{
 				box.m_destroyed = true;
 			}
 
-			Direction dir = std::get<1>(collision);
-			glm::vec2 diff_vector = std::get<2>(collision);
 
-
-			if (dir == LEFT || dir == RIGHT) // horizontal collision
+			if (direction == LEFT || direction == RIGHT) // horizontal collision
 			{
 				Ball->m_velocity.x = -Ball->m_velocity.x;
 
-				float penetration = Ball->m_radius - std::abs(diff_vector.x);
-				if (dir == LEFT)
+				float penetration = Ball->m_radius - std::abs(difference.x);
+				if (direction == LEFT)
 					Ball->m_position += penetration;
 				else
 					Ball->m_position -= penetration;
@@ -145,14 +143,28 @@ void Game::HandleCollisions()
 			{
 				Ball->m_velocity.y = -Ball->m_velocity.y;
 
-				float penetration = Ball->m_radius - std::abs(diff_vector.y);
-				if (dir == UP)
+				float penetration = Ball->m_radius - std::abs(difference.y);
+				if (direction == UP)
 					Ball->m_position.y -= penetration; // move ball back up
 				else
 					Ball->m_position.y += penetration;
 			}
 		}
 	}
+	
+	if (Ball->m_stuck)
+		return;
+
+	// collision tuple
+	auto [hasColided, direction, difference] = CheckCollisions(*Ball, *Player);
+
+	if (hasColided)
+	{
+
+		float playerCentreX = Player->m_position.x + Player->m_size.x / 2.0f;
+
+	}
+
 }
 
 Direction Game::VectorDirection(glm::vec2 target)
