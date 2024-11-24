@@ -79,6 +79,7 @@ void Game::Update(float dt)
 
 	Particles->Update(dt, *Ball, 1, glm::vec2(Ball->m_radius / 2.0f));
 
+
 	HandleCollisions();
 }
 

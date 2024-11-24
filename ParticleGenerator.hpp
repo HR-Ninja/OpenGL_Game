@@ -11,8 +11,8 @@ struct Particle {
     glm::vec2 m_position, m_velocity;
     glm::vec4 m_color;
     float m_life;
-
-    Particle() : m_position(0.0f), m_velocity(0.0f), m_color(1.0f), m_life(0.0f) { }
+    bool m_active;
+    Particle() : m_position(0.0f), m_velocity(0.0f), m_color(1.0f), m_life(0.0f), m_active(false) { }
 };
 
 class ParticleGenerator

@@ -1,5 +1,7 @@
 #include "ParticleGenerator.hpp"
 
+
+
 ParticleGenerator::ParticleGenerator(Shader shader, Texture2D texture, unsigned int amount) : m_shader(shader), m_texture(texture), m_amount(amount)
 {
     unsigned int VBO;
@@ -24,7 +26,7 @@ ParticleGenerator::ParticleGenerator(Shader shader, Texture2D texture, unsigned 
     glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
     glBindVertexArray(0);
 
-    m_particles.reserve(m_amount * 1.5);
+    m_particles.reserve(m_amount * 2);
     for (unsigned int i = 0; i < amount; ++i)
         m_particles.push_back(Particle());
 }
@@ -46,6 +48,10 @@ void ParticleGenerator::Update(float dt, GameObject& object, unsigned int newPar
             p.m_position -= p.m_velocity * dt;
             p.m_color.a -= dt * 2.5f;
         }
+        else
+        {
+            p.m_active = false;
+        }
     }
 }
 
@@ -54,8 +60,13 @@ void ParticleGenerator::Draw()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     m_shader.Use();
 
-    for (const Particle& p : m_particles)
+    for (const Particle p : m_particles)
     {
+        if (!p.m_active)
+        {
+            continue;
+        }
+
         m_shader.SetVector2f("offset", p.m_position);
         m_shader.SetVector4f("color", p.m_color);
         m_texture.Bind();
@@ -97,6 +108,7 @@ void ParticleGenerator::respawnParticle(Particle& particle, const GameObject& ob
 {
     float random = ((rand() % 100) - 50) / 10.0f;
     float rColor = 0.5f + ((rand() % 100) / 100.0f);
+    particle.m_active = true;
     particle.m_position = object.m_position + random + offset;
     particle.m_color = glm::vec4(rColor, rColor, rColor, 1.0f);
     particle.m_life = 1.0f;
