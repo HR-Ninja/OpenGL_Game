@@ -57,6 +57,9 @@
     <ClCompile Include="BallObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libaries\includes\GLFW\glfw3.h">
@@ -977,6 +980,9 @@
     <ClInclude Include="BallObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleGenerator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Libaries\includes\glm\detail\func_common.inl">
@@ -1396,6 +1402,8 @@
     <None Include="Resources\Shaders\sprite.vert" />
     <None Include="Resources\Shaders\sprite.frag" />
     <None Include="Resources\Assets\one.lvl" />
+    <None Include="Resources\Shaders\particles.vert" />
+    <None Include="Resources\Shaders\particles.frag" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Libaries\lib\glfw3.lib" />
@@ -1411,6 +1419,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Resources\Assets\block_solid.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\particle.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

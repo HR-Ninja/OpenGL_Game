@@ -1,11 +1,13 @@
 #include "Game.hpp"
 #include "Profiler.hpp"
 #include "BallObject.hpp"
+#include "ParticleGenerator.hpp"
 
 
 SpriteRenderer* Renderer;
 GameObject* Player;
 BallObject* Ball;
+ParticleGenerator* Particles;
 
 // Initial velocity of the Ball
 const glm::vec2 INITIAL_BALL_VELOCITY(100.0f, -350.0f);
@@ -22,17 +24,25 @@ Game::~Game()
 {
 	delete Renderer;
 	delete Player;
+	delete Ball;
+	delete Particles;
 }
 
 void Game::Init()
 {
 	PROFILE_FUNCTION();
 	ResourceManager::LoadShader("Resources/Shaders/sprite.vert", "Resources/Shaders/sprite.frag", nullptr, "sprite");
+	ResourceManager::LoadShader("Resources/Shaders/particles.vert", "Resources/Shaders/particles.frag", nullptr, "particle");
 
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->Width),
 		static_cast<float>(this->Height), 0.0f, -1.0f, 1.0f);
+
 	ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
 	ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
+
+	ResourceManager::GetShader("particle").Use().SetInteger("sprite", 0);
+	ResourceManager::GetShader("particle").SetMatrix4("projection", projection);
+
 	// set render-specific controls
 	Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
 
@@ -40,11 +50,12 @@ void Game::Init()
 	ResourceManager::LoadTexture("Resources/Assets/block_solid.png", false, "block_solid");
 	ResourceManager::LoadTexture("Resources/Assets/paddle.png", true, "paddle");
 	ResourceManager::LoadTexture("Resources/Assets/test_sprite.png", true, "face");
+	ResourceManager::LoadTexture("Resources/Assets/particle.png", true, "particle");
 
 	GameLevel one; 
 	one.Load("Resources/Assets/one.lvl", this->Width, this->Height / 2);
-	
 	Levels.push_back(one);
+	
 
 	glm::vec2 playerPos = glm::vec2(this->Width / 2.0f - PLAYER_SIZE.x / 2.0f, this->Height - PLAYER_SIZE.y);
 	Player = new GameObject(playerPos, PLAYER_SIZE, ResourceManager::GetTexture("paddle"));
@@ -54,20 +65,21 @@ void Game::Init()
 		-BALL_RADIUS * 2.0f);
 	Ball = new BallObject(ballPos, BALL_RADIUS, INITIAL_BALL_VELOCITY,
 		ResourceManager::GetTexture("face"));
+
+	Particles = new ParticleGenerator(
+		ResourceManager::GetShader("particle"),
+		ResourceManager::GetTexture("particle"),
+		2000
+	);
 }
 
 void Game::Update(float dt)
 {
-	
-
 	Ball->Move(dt);
 
-	HandleCollisions();
+	Particles->Update(dt, *Ball, 1, glm::vec2(Ball->m_radius / 2.0f));
 
-	if (Ball->m_position.y >= Settings::g_window.SCREEN_HEIGHT)
-	{
-		State = GAME_MENU;
-	}
+	HandleCollisions();
 }
 
 void Game::ProcessInput(float dt)
@@ -105,7 +117,23 @@ void Game::Render()
 		// draw player
 		Player->Draw(*Renderer);
 
+		Particles->Draw();
+
 		Ball->Draw(*Renderer);
+	}
+}
+
+void Game::ResetPlayer()
+{
+	Player->m_position = glm::vec2(this->Width / 2.0f - PLAYER_SIZE.x / 2.0f, this->Height - PLAYER_SIZE.y);
+	Ball->Reset(Player->m_position + glm::vec2(PLAYER_SIZE.x / 2.0f - BALL_RADIUS, -(BALL_RADIUS * 2.0f)), INITIAL_BALL_VELOCITY);
+}
+
+void Game::ResetLevel()
+{
+	if (Level == 0)
+	{
+		Levels[0].Load("Resources/Assets/one.lvl", this->Width, this->Height / 2);
 	}
 }
 
@@ -162,7 +190,22 @@ void Game::HandleCollisions()
 	{
 
 		float playerCentreX = Player->m_position.x + Player->m_size.x / 2.0f;
+		float distance = (Ball->m_position.x + Ball->m_radius) - playerCentreX;
+		float percentage = distance / (Player->m_size.x / 2.0f);
 
+		float strength = 2.0f;
+
+		glm::vec2 oldVelocity = Ball->m_velocity;
+		Ball->m_velocity.x = INITIAL_BALL_VELOCITY.x * percentage * strength;
+		Ball->m_velocity.y = -1.0f * abs(Ball->m_velocity.y);
+		Ball->m_velocity = glm::normalize(Ball->m_velocity) * glm::length(oldVelocity);
+	}
+
+
+	if (Ball->m_position.y >= Settings::g_window.SCREEN_HEIGHT)
+	{
+		ResetLevel();
+		ResetPlayer();
 	}
 
 }
@@ -218,17 +261,3 @@ Collision Game::CheckCollisions(BallObject& one, GameObject& two)
 	}
 
 }
-
-
-
-// Box collision
-//bool Game::CheckCollisions(GameObject& one, GameObject& two)
-//{
-//	bool collisionX = (one.m_position.x + one.m_size.x) >= two.m_position.x && (two.m_position.x + two.m_size.x) >= one.m_position.x;
-//	bool collisionY = (one.m_position.y + one.m_size.y) >= two.m_position.y && (two.m_position.y + two.m_size.y) >= one.m_position.y;
-//
-//	return collisionX && collisionY;
-//}
-
-
-

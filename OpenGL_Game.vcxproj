@@ -160,6 +160,7 @@
     <ClCompile Include="Libaries\includes\glm\glm.cppm" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OpenGL.cpp" />
+    <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
@@ -467,6 +468,7 @@
     <ClInclude Include="OpenGL.hpp" />
     <ClInclude Include="Profiler.hpp" />
     <ClInclude Include="ResourceManager.hpp" />
+    <ClInclude Include="ParticleGenerator.hpp" />
     <ClInclude Include="Settings.hpp" />
     <ClInclude Include="SpriteRenderer.hpp" />
     <ClInclude Include="Shader.hpp" />
@@ -614,6 +616,8 @@
     <None Include="Libaries\includes\glm\gtx\vector_query.inl" />
     <None Include="Libaries\includes\glm\gtx\wrap.inl" />
     <None Include="Resources\Assets\one.lvl" />
+    <None Include="Resources\Shaders\particles.frag" />
+    <None Include="Resources\Shaders\particles.vert" />
     <None Include="Resources\Shaders\sprite.frag" />
     <None Include="Resources\Shaders\sprite.vert" />
   </ItemGroup>
@@ -624,6 +628,7 @@
     <Image Include="Resources\Assets\block.png" />
     <Image Include="Resources\Assets\block_solid.png" />
     <Image Include="Resources\Assets\paddle.png" />
+    <Image Include="Resources\Assets\particle.png" />
     <Image Include="Resources\Assets\test_sprite.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
