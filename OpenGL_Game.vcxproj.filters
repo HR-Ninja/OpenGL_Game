@@ -1424,5 +1424,8 @@
     <Image Include="Resources\Assets\particle.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Assets\football.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

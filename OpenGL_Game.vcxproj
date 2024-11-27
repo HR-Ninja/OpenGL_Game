@@ -627,6 +627,7 @@
   <ItemGroup>
     <Image Include="Resources\Assets\block.png" />
     <Image Include="Resources\Assets\block_solid.png" />
+    <Image Include="Resources\Assets\football.png" />
     <Image Include="Resources\Assets\paddle.png" />
     <Image Include="Resources\Assets\particle.png" />
     <Image Include="Resources\Assets\test_sprite.png" />

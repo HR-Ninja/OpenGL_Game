@@ -49,8 +49,8 @@ void Game::Init()
 	ResourceManager::LoadTexture("Resources/Assets/block.png", false, "block");
 	ResourceManager::LoadTexture("Resources/Assets/block_solid.png", false, "block_solid");
 	ResourceManager::LoadTexture("Resources/Assets/paddle.png", true, "paddle");
-	ResourceManager::LoadTexture("Resources/Assets/test_sprite.png", true, "face");
 	ResourceManager::LoadTexture("Resources/Assets/particle.png", true, "particle");
+	ResourceManager::LoadTexture("Resources/Assets/football.png", true, "ball");
 
 	GameLevel one; 
 	one.Load("Resources/Assets/one.lvl", this->Width, this->Height / 2);
@@ -60,11 +60,10 @@ void Game::Init()
 	glm::vec2 playerPos = glm::vec2(this->Width / 2.0f - PLAYER_SIZE.x / 2.0f, this->Height - PLAYER_SIZE.y);
 	Player = new GameObject(playerPos, PLAYER_SIZE, ResourceManager::GetTexture("paddle"));
 
-
 	glm::vec2 ballPos = playerPos + glm::vec2(PLAYER_SIZE.x / 2.0f - BALL_RADIUS,
 		-BALL_RADIUS * 2.0f);
 	Ball = new BallObject(ballPos, BALL_RADIUS, INITIAL_BALL_VELOCITY,
-		ResourceManager::GetTexture("face"));
+		ResourceManager::GetTexture("ball"));
 
 	Particles = new ParticleGenerator(
 		ResourceManager::GetShader("particle"),
@@ -115,11 +114,10 @@ void Game::Render()
 	{
 		// draw level
 		Levels[Level].Draw(*Renderer);
-		// draw player
-		Player->Draw(*Renderer);
-
 		Particles->Draw();
 
+		// draw player
+		Player->Draw(*Renderer);
 		Ball->Draw(*Renderer);
 	}
 }

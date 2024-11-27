@@ -3,6 +3,7 @@
 BallObject::BallObject()
 	: GameObject(), m_radius(12.5f), m_stuck(true)
 {
+
 }
 
 BallObject::BallObject(glm::vec2 pos, float radius, glm::vec2 velocity, Texture2D sprite) 
